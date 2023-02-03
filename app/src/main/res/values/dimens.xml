@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dimension_name">24sp</dimen>
+    <dimen name="dimension_price_detail">24sp</dimen>
+    <dimen name="dimension_info_detail">12dp</dimen>
+    <dimen name="dimension_AsksBids_detail">18dp</dimen>
+    <dimen name="dimension_margin_bottom_name_detail">10dp</dimen>
+
+    <dimen name="dimension_subtitle_detail_padding">10dp</dimen>
+    <dimen name="dimension_info_detail_padding">5dp</dimen>
+</resources>
