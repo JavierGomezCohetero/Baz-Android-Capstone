@@ -15,7 +15,7 @@
             android:id="@+id/pbCurrencyDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,255 +41,197 @@
                 <TextView
                     android:id="@+id/tvNameBook"
                     style="@style/NameText"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/dimension_margin_bottom_name_detail"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-
                     tools:text="Bitcoin" />
 
+                <TextView
+                    android:id="@+id/tvSlugBook"
+                    style="@style/SubNameDetailText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/dimension_margin_bottom_name_detail"
+                    app:layout_constraintBottom_toBottomOf="@id/ivImageCurrency"
+                    app:layout_constraintStart_toEndOf="@id/ivImageCurrency"
+                    app:layout_constraintTop_toBottomOf="@id/tvNameBook"
+                    tools:text="Bitcoin" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/clSlug"
+                <ImageView
+                    android:id="@+id/ivImageCurrency"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvNameBook"
+                    tools:src="@drawable/bitcoin_btc_logo" />
+
+                <TextView
+                    android:id="@+id/tvDescriptionMinPrice"
+                    style="@style/InfoDetailText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/maximum_price_detail"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivImageCurrency"
+                    tools:text="@string/maximum_price_detail" />
+
+                <TextView
+                    android:id="@+id/tvMaximumPrice"
+                    style="@style/PriceDetailText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvNameBook">
+                    app:layout_constraintTop_toBottomOf="@id/tvDescriptionMinPrice"
+                    tools:text="499,999.00" />
 
-                    <TextView
-                        android:id="@+id/tvSlugBook"
-                        style="@style/NameDetailText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/dimension_margin_bottom_name_detail"
-                        app:layout_constraintStart_toEndOf="@id/ivImageCurrency"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="Bitcoin" />
+                <TextView
+                    android:id="@+id/tvDescriptionMaxPrice"
+                    style="@style/InfoDetailText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/minimum_price_detail"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvMaximumPrice"
+                    tools:text="@string/minimum_price_detail" />
 
-                    <ImageView
-                        android:id="@+id/ivImageCurrency"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:scaleType="centerCrop"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/tvSlugBook"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:src="@drawable/bitcoin_btc_logo" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/clInfoDetail"
+                <TextView
+                    android:id="@+id/tvMinimumPrice"
+                    style="@style/PriceDetailText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/clSlug">
+                    app:layout_constraintTop_toBottomOf="@+id/tvDescriptionMaxPrice"
+                    tools:text="499,999.00" />
 
-                    <TextView
-                        android:id="@+id/tvDescriptionMinPrice"
-                        style="@style/InfoDetailText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/maximum_price_detail"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="@string/maximum_price_detail" />
+                <TextView
+                    android:id="@+id/tvDescriptionLastPrice"
+                    style="@style/InfoDetailText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/last_price_detail"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvMinimumPrice"
+                    tools:text="@string/last_price_detail" />
 
-                    <TextView
-                        android:id="@+id/tvMaximumPrice"
-                        style="@style/PriceDetailText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvDescriptionMinPrice"
-                        tools:text="499,999.00" />
-
-                    <TextView
-                        android:id="@+id/tvDescriptionMaxPrice"
-                        style="@style/InfoDetailText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/minimum_price_detail"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvMaximumPrice"
-                        tools:text="@string/minimum_price_detail" />
-
-                    <TextView
-                        android:id="@+id/tvMinimumPrice"
-                        style="@style/PriceDetailText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvDescriptionMaxPrice"
-                        tools:text="499,999.00" />
-
-                    <TextView
-                        android:id="@+id/tvDescriptionLastPrice"
-                        style="@style/InfoDetailText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/last_price_detail"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvMinimumPrice"
-                        tools:text="@string/last_price_detail" />
-
-                    <TextView
-                        android:id="@+id/tvLastPrice"
-                        style="@style/PriceDetailText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvDescriptionLastPrice"
-                        tools:text="48,000.00" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
+                <TextView
+                    android:id="@+id/tvLastPrice"
+                    style="@style/PriceDetailText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvDescriptionLastPrice"
+                    tools:text="48,000.00" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clAsks"
+        <TextView
+            android:id="@+id/tvAsks"
+            style="@style/Subtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/asks"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cvInfoCurrency">
+            app:layout_constraintTop_toBottomOf="@id/cvInfoCurrency"
+            tools:text="ASKS">
 
-            <TextView
-                android:id="@+id/tvAsks"
-                style="@style/Subtitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/asks"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="ASKS">
+        </TextView>
 
-            </TextView>
+        <TextView
+            android:id="@+id/tvAmount"
+            style="@style/DetailAsksBidsText"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/amount"
+            app:layout_constraintEnd_toStartOf="@id/tvPrice"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvAsks">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvAsks">
+        </TextView>
 
-                <TextView
-                    android:id="@+id/tvAmount"
-                    style="@style/DetailAsksBidsText"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/amount"
-                    app:layout_constraintEnd_toStartOf="@id/tvPrice"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:id="@+id/tvPrice"
+            style="@style/DetailAsksBidsText"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/price"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvAmount"
+            app:layout_constraintTop_toBottomOf="@id/tvAsks">
 
-                </TextView>
+        </TextView>
 
-                <TextView
-                    android:id="@+id/tvPrice"
-                    style="@style/DetailAsksBidsText"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/price"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/tvAmount"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                </TextView>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentListAsks"
-            android:name="com.example.bitsocrypto.ui.view.ListAsksAndBidFragment"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvListAsks"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/clAsks">
+            app:layout_constraintTop_toBottomOf="@id/tvPrice"
+            tools:listitem="@layout/item_asks_bids">
 
-        </androidx.fragment.app.FragmentContainerView>
+        </androidx.recyclerview.widget.RecyclerView>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clBids"
+        <TextView
+            android:id="@+id/tvBids"
+            style="@style/Subtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/bids"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragmentListAsks">
+            app:layout_constraintTop_toBottomOf="@+id/rvListAsks"
+            tools:text="BIDS">
 
-            <TextView
-                android:id="@+id/tvBids"
-                style="@style/Subtitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/bids"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="BIDS">
+        </TextView>
 
-            </TextView>
+        <TextView
+            android:id="@+id/tvAmountBids"
+            style="@style/DetailAsksBidsText"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/amount"
+            app:layout_constraintEnd_toStartOf="@id/tvPriceBids"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvBids">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvBids">
+        </TextView>
 
-                <TextView
-                    android:id="@+id/tvAmountBids"
-                    style="@style/DetailAsksBidsText"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/amount"
-                    app:layout_constraintEnd_toStartOf="@id/tvPriceBids"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:id="@+id/tvPriceBids"
+            style="@style/DetailAsksBidsText"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/price"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvAmountBids"
+            app:layout_constraintTop_toBottomOf="@+id/tvBids">
 
-                </TextView>
+        </TextView>
 
-                <TextView
-                    android:id="@+id/tvPriceBids"
-                    style="@style/DetailAsksBidsText"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/price"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/tvAmountBids"
-                    app:layout_constraintTop_toTopOf="parent">
 
-                </TextView>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentListBid"
-            android:name="com.example.bitsocrypto.ui.view.ListBidsFragment"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvListBids"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/clBids">
+            app:layout_constraintTop_toBottomOf="@id/tvPriceBids"
+            tools:listitem="@layout/item_asks_bids">
 
-        </androidx.fragment.app.FragmentContainerView>
+        </androidx.recyclerview.widget.RecyclerView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

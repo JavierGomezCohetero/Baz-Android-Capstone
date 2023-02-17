@@ -27,6 +27,7 @@
         <!--        <item name="android:textColor">@color/gold</item>-->
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/dimension_name</item>
+        <item name="android:textAlignment">center</item>
     </style>
 
     <style name="NameDetailText" parent="TextAppearance.AppCompat">
@@ -36,6 +37,15 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textSize">@dimen/dimension_info_detail</item>
+    </style>
+
+    <style name="SubNameDetailText" parent="TextAppearance.AppCompat">
+        <!--        <item name="android:textColor">@color/gold</item>-->
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">@dimen/dimension_info_detail_name</item>
     </style>
 
     <style name="PriceDetailText" parent="TextAppearance.AppCompat">

@@ -7,36 +7,35 @@ import com.example.bitsocrypto.data.model.IconResultModelItem
 import com.example.bitsocrypto.data.model.TickerModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class CurrencyService {
-    private val retrofit = RetrofitHelper.getRetrofit()
+class CurrencyRemoteDataSource @Inject constructor(private val api: CurrencyApiClient) {
     private val icon = RetrofitHelper.getIcons()
 
     suspend fun getCurrencies(): List<CurrencyModel> {
         return withContext(Dispatchers.IO) {
-            val response = retrofit.create(CurrencyApiClient::class.java).getAllCurrencies()
+            val response = api.getAllCurrencies()
             response.body()?.payload ?: emptyList()
         }
     }
 
-    suspend fun getCurrencyDetail(currencyName: String): CurrencyDetailModel {
+    suspend fun getBook(currencyName: String): CurrencyDetailModel {
         return withContext(Dispatchers.IO) {
-            val response =
-                retrofit.create(CurrencyApiClient::class.java).getCurrencyDetail(currencyName)
+            val response = api.getBook(currencyName)
             response.body()?.payload!!
         }
     }
 
     suspend fun getTicker(currencyName: String): TickerModel {
         return withContext(Dispatchers.IO) {
-            val response = retrofit.create(CurrencyApiClient::class.java).getTickers(currencyName)
+            val response = api.getTickers(currencyName)
             response.body()?.payload!!
         }
     }
 
     suspend fun getIcons(): List<IconResultModelItem> {
         return withContext(Dispatchers.IO) {
-            val response = icon.create(IconsApiClient::class.java).getIcons()
+            val response = icon.create(IconApiClient::class.java).getIcons()
             response.body() ?: emptyList()
         }
     }

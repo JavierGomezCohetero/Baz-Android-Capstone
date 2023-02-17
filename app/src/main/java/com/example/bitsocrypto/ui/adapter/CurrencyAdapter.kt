@@ -4,17 +4,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.example.bitsocrypto.data.model.CurrencyModel
 import com.example.bitsocrypto.databinding.ItemCurrencyBinding
+import com.example.bitsocrypto.domain.models.Currency
 
-class CurrencyAdapter(private val onClickListener: onItemClicSelected) :
-    ListAdapter<CurrencyModel, CurrencyViewHolder>(DiffCallback) {
-    object DiffCallback : DiffUtil.ItemCallback<CurrencyModel>() {
-        override fun areItemsTheSame(oldItem: CurrencyModel, newItem: CurrencyModel): Boolean {
+class CurrencyAdapter(private val onClickListener: OnItemClickSelected) :
+    ListAdapter<Currency, CurrencyViewHolder>(DiffCallback) {
+    object DiffCallback : DiffUtil.ItemCallback<Currency>() {
+        override fun areItemsTheSame(oldItem: Currency, newItem: Currency): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: CurrencyModel, newItem: CurrencyModel): Boolean {
+        override fun areContentsTheSame(oldItem: Currency, newItem: Currency): Boolean {
             return oldItem.book == newItem.book
         }
 
@@ -30,7 +30,7 @@ class CurrencyAdapter(private val onClickListener: onItemClicSelected) :
         holder.render(getItem(position), onClickListener)
     }
 
-    interface onItemClicSelected {
-        fun onItemSelected(currencyName: CurrencyModel)
+    interface OnItemClickSelected {
+        fun onItemSelected(currencyName: Currency)
     }
 }
