@@ -21,7 +21,7 @@
         tools:layout="@layout/fragment_currency_detail">
         <argument
             android:name="currency"
-            app:argType="com.example.bitsocrypto.data.model.CurrencyModel"
+            app:argType="com.example.bitsocrypto.domain.models.Currency"
             app:nullable="false" />
     </fragment>
 </navigation>

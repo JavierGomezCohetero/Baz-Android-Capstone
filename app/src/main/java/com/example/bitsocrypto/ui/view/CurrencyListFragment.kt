@@ -5,19 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.bitsocrypto.data.model.CurrencyModel
 import com.example.bitsocrypto.databinding.FragmentCurrencyListBinding
+import com.example.bitsocrypto.domain.models.Currency
 import com.example.bitsocrypto.ui.adapter.CurrencyAdapter
 import com.example.bitsocrypto.ui.viewmodel.CurrencyViewModel
 
 
-class CurrencyListFragment : Fragment(), CurrencyAdapter.onItemClicSelected {
+class CurrencyListFragment : Fragment(), CurrencyAdapter.OnItemClickSelected {
 
-    private lateinit var binding: FragmentCurrencyListBinding
+    lateinit var binding: FragmentCurrencyListBinding
     private val currencyViewModel: CurrencyViewModel by activityViewModels()
     private lateinit var adapter: CurrencyAdapter
 
@@ -40,21 +41,25 @@ class CurrencyListFragment : Fragment(), CurrencyAdapter.onItemClicSelected {
 
         }
         currencyViewModel.getCurrencies()
-        currencyViewModel.availableBooks.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
-        }
-        currencyViewModel.state.observe(viewLifecycleOwner){
-            binding.pbCurrency.isVisible = it.isLoading
-            binding.clError.isVisible = true
-            binding.tvError.text = it.error
-        }
+        showData()
     }
 
-    override fun onItemSelected(currencyName: CurrencyModel) {
+    override fun onItemSelected(currencyName: Currency) {
         val action =
             CurrencyListFragmentDirections.actionCurrencyListFragmentToCurrencyDetailFragment(
                 currencyName
             )
         findNavController().navigate(action)
+    }
+
+    private fun showData() {
+        currencyViewModel.state.observe(viewLifecycleOwner) {
+            if (it.error.isNotBlank()) {
+                Toast.makeText(context, it.error, Toast.LENGTH_SHORT).show()
+            } else {
+                binding.pbCurrency.isVisible = it.is_loading
+                adapter.submitList(it.availableBooks)
+            }
+        }
     }
 }

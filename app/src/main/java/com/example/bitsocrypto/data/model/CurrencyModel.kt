@@ -5,6 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class CurrencyModel(
+    val bitsoId: Int = 0,
     val book: String = "",
     val default_chart: String = "",
     val maximum_amount: String = "",
@@ -14,6 +15,6 @@ data class CurrencyModel(
     val minimum_price: String = "",
     val minimum_value: String = "",
     val tick_size: String = "",
-    var imgUrl: String = "",
+    var img_url: String = "",
     var name: String = ""
 ) : Parcelable
