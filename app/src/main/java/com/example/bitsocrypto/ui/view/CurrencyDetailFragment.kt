@@ -1,11 +1,11 @@
 package com.example.bitsocrypto.ui.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +17,6 @@ import com.example.bitsocrypto.ui.adapter.TickersAdapter
 import com.example.bitsocrypto.ui.viewmodel.CurrencyViewModel
 import com.example.bitsocrypto.utils.extensions.formatCurrency
 
-
 class CurrencyDetailFragment : Fragment() {
 
     private lateinit var binding: FragmentCurrencyDetailBinding
@@ -27,7 +26,8 @@ class CurrencyDetailFragment : Fragment() {
     private lateinit var adapterBids: TickersAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCurrencyDetailBinding.inflate(inflater, container, false)
@@ -53,7 +53,7 @@ class CurrencyDetailFragment : Fragment() {
     }
 
     private fun cardDetail(currency: Currency) {
-        viewModel.getCurrencyDetail(currency.bitsoId, currency.book)
+        viewModel.getCurrencyDetail(currency.bitso_id, currency.book)
         viewModel.state.observe(viewLifecycleOwner) {
             with(binding) {
                 if (it.error.isNotBlank()) {

@@ -1,6 +1,5 @@
 package com.example.bitsocrypto.domain.models
 
-import com.example.bitsocrypto.data.database.entities.Detail
 import com.example.bitsocrypto.data.model.TickerModel
 
 data class Ticker(

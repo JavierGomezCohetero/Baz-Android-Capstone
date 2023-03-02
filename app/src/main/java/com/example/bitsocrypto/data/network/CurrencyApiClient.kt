@@ -1,10 +1,9 @@
 package com.example.bitsocrypto.data.network
 
-
 import com.example.bitsocrypto.data.model.CurrencyDetailResultModel
 import com.example.bitsocrypto.data.model.CurrencyResultModel
-import com.example.bitsocrypto.data.model.IconResultModelItem
 import com.example.bitsocrypto.data.model.TickerResultModel
+import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -14,9 +13,8 @@ interface CurrencyApiClient {
     suspend fun getAllCurrencies(): Response<CurrencyResultModel>
 
     @GET("order_book/")
-    suspend fun getBook (@Query("book") book: String): Response<CurrencyDetailResultModel>
+    fun getBook(@Query("book") book: String): Single<CurrencyDetailResultModel>
 
     @GET("ticker/")
-    suspend fun getTickers(@Query("book") book: String): Response<TickerResultModel>
-
+    fun getTickers(@Query("book") book: String): Single<TickerResultModel>
 }

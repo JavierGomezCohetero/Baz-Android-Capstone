@@ -10,9 +10,9 @@ fun stringConvert(nameCurrency: String): String {
     return nameCurrency.split(delim)[0].uppercase()
 }
 
-
 fun Double.formatCurrency(): String {
     return NumberFormat.getCurrencyInstance().format(this)
 }
 
-fun AppCompatImageView.loadUrl(url: String) = Glide.with(context).load(url).placeholder(R.drawable.bitcoin_btc_logo).into(this)
+fun AppCompatImageView.loadUrl(url: String) =
+    Glide.with(context).load(url).placeholder(R.drawable.bitcoin_btc_logo).into(this)

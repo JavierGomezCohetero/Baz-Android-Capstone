@@ -3,11 +3,11 @@ package com.example.bitsocrypto.domain.models
 import android.os.Parcelable
 import com.example.bitsocrypto.data.database.entities.CurrencyRoom
 import com.example.bitsocrypto.data.model.CurrencyModel
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Currency(
-    var bitsoId: Int = 0,
+    var bitso_id: Int = 0,
     val book: String,
     val default_chart: String,
     val maximum_amount: String,
@@ -21,9 +21,8 @@ data class Currency(
     var name: String
 ) : Parcelable
 
-
 fun CurrencyModel.toDomain() = Currency(
-    bitsoId,
+    bitso_id,
     book,
     default_chart,
     maximum_amount,
@@ -38,7 +37,7 @@ fun CurrencyModel.toDomain() = Currency(
 )
 
 fun CurrencyRoom.toDomain() = Currency(
-    bitsoId,
+    bitso_id,
     book,
     default_chart,
     maximum_amount,

@@ -1,21 +1,20 @@
 package com.example.bitsocrypto.data.database.converters
 
+import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
 import com.example.bitsocrypto.domain.models.Book
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import java.lang.reflect.Type
 
-
-class BookConverter {
+@ProvidedTypeConverter
+class BookConverter(private val list_book: Type, private val gson: Gson) {
     @TypeConverter
     fun fromString(value: String): Book {
-        val listType = object : TypeToken<Book>() {}.type
-        return Gson().fromJson(value, listType)
+        return Gson().fromJson(value, list_book)
     }
 
     @TypeConverter
     fun fromBook(list: Book): String {
-        val gson = Gson()
         return gson.toJson(list)
     }
 }

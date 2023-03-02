@@ -7,7 +7,7 @@ data class Book(
     val asks: List<AskBid> = listOf(),
     val bids: List<AskBid> = listOf(),
     val sequence: String = "",
-    val updatedAt: String = "",
+    val updated_at: String = "",
 )
 
 fun CurrencyDetailModel.toDomain() = Book(

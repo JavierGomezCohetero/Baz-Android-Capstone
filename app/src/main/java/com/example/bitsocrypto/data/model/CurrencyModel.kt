@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class CurrencyModel(
-    val bitsoId: Int = 0,
+    val bitso_id: Int = 0,
     val book: String = "",
     val default_chart: String = "",
     val maximum_amount: String = "",

@@ -19,12 +19,11 @@ interface CurrencyDao {
     suspend fun deleteAllCurrencies()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertDetails(data: List<Detail>)
+    fun insertDetails(data: List<Detail>)
 
     @Query("SELECT * FROM detail_table")
-    suspend fun getAllDetails(): List<Detail>
+    fun getAllDetails(): List<Detail>
 
     @Query("DELETE FROM detail_table")
-    suspend fun deleteAllDetails()
-
+    fun deleteAllDetails()
 }

@@ -1,17 +1,7 @@
 package com.example.bitsocrypto.ui.view
 
-import androidx.fragment.app.testing.FragmentScenario
-import androidx.fragment.app.testing.launchFragmentInContainer
-import androidx.lifecycle.Lifecycle
 import androidx.test.runner.AndroidJUnit4
-import com.example.bitsocrypto.R
-import com.example.bitsocrypto.domain.GetCurrenciesUseCase
-import com.example.bitsocrypto.domain.GetCurrencyDetailUseCase
-import com.example.bitsocrypto.ui.viewmodel.CurrencyViewModel
-import io.mockk.mockk
-import org.junit.After
 import org.junit.Assert.*
-import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
