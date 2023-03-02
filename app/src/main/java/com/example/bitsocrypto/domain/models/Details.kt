@@ -3,15 +3,15 @@ package com.example.bitsocrypto.domain.models
 import com.example.bitsocrypto.data.database.entities.Detail
 
 data class Details(
-    val bitsoId: Int,
+    val bitso_id: Int,
     val tickers: Ticker,
     val book: Book,
-    val fromDatabase: Boolean = false
+    val from_database: Boolean = false
 )
 
 fun Detail.toDatabase() = Details(
-    bitsoId,
+    bitso_id,
     tickers,
     book,
-    fromDatabase
+    from_database
 )

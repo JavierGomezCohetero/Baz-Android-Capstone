@@ -1,6 +1,5 @@
 package com.example.bitsocrypto.data.database.entities
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.bitsocrypto.domain.models.Currency
@@ -8,22 +7,22 @@ import com.example.bitsocrypto.domain.models.Currency
 @Entity(tableName = "currencies_table")
 data class CurrencyRoom(
     @PrimaryKey val id: Int? = null,
-    @ColumnInfo("bitsoId") val bitsoId: Int = 0,
-    @ColumnInfo("book") val book: String = "",
-    @ColumnInfo(name = "default_chart") val default_chart: String = "",
-    @ColumnInfo(name = "maximum_amount") val maximum_amount: String = "",
-    @ColumnInfo(name = "maximum_price") val maximum_price: String = "",
-    @ColumnInfo(name = "maximum_value") val maximum_value: String = "",
-    @ColumnInfo(name = "minimum_amount") val minimum_amount: String = "",
-    @ColumnInfo(name = "minimum_price") val minimum_price: String = "",
-    @ColumnInfo(name = "minimum_value") val minimum_value: String = "",
-    @ColumnInfo(name = "tick_size") val tick_size: String = "",
-    @ColumnInfo("img_url") val img_url: String = "",
-    @ColumnInfo("name") val name: String = ""
+    val bitso_id: Int = 0,
+    val book: String = "",
+    val default_chart: String = "",
+    val maximum_amount: String = "",
+    val maximum_price: String = "",
+    val maximum_value: String = "",
+    val minimum_amount: String = "",
+    val minimum_price: String = "",
+    val minimum_value: String = "",
+    val tick_size: String = "",
+    val img_url: String = "",
+    val name: String = ""
 )
 
 fun Currency.toDatabase() = CurrencyRoom(
-    bitsoId = bitsoId,
+    bitso_id = bitso_id,
     book = book,
     default_chart = default_chart,
     maximum_amount = maximum_amount,

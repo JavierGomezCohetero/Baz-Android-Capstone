@@ -4,30 +4,29 @@ import com.example.bitsocrypto.domain.models.Book
 import com.example.bitsocrypto.domain.models.Details
 import com.example.bitsocrypto.domain.models.Ticker
 import com.example.bitsocrypto.domain.repository.CurrencyRepository
-import com.example.bitsocrypto.domain.repository.utils.DataConverter
-import io.mockk.MockKAnnotations
-import io.mockk.clearAllMocks
-import io.mockk.coEvery
+import com.example.bitsocrypto.utils.network.NetworkState
+import io.mockk.*
 import io.mockk.impl.annotations.RelaxedMockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
-
 internal class GetCurrencyDetailUseCaseTest {
     @RelaxedMockK
     private lateinit var repository: CurrencyRepository
     private lateinit var getCurrencyDetailUseCase: GetCurrencyDetailUseCase
-    private var dataConverter: DataConverter = DataConverter
+
+    @RelaxedMockK
+    private lateinit var networkMock: NetworkState
 
     @Before
     fun onBefore() {
         MockKAnnotations.init(this)
-        getCurrencyDetailUseCase = GetCurrencyDetailUseCase(repository)
+        every { networkMock.isNetworkConnected() } returns true
+        getCurrencyDetailUseCase = GetCurrencyDetailUseCase(repository, networkMock)
     }
 
     @After
@@ -41,23 +40,31 @@ internal class GetCurrencyDetailUseCaseTest {
         val tickerMock = Ticker()
         val bookMock = Book()
         val list = mutableListOf<Details>(
-            Details(0, tickerMock, bookMock, false)
+            Details(
+                0,
+                tickerMock,
+                bookMock,
+                false
+            )
         )
 
+        every { repository.getBook("btc_mxn") } returns mockk(relaxed = true) {
+            every { blockingGet() } returns bookMock
+        }
+        every { repository.getTicker("btc_mxn") } returns mockk(relaxed = true) {
+            every { blockingGet() } returns tickerMock
+        }
 
-        coEvery { repository.getBook("btc_mxn") } returns bookMock
-        coEvery { repository.getTicker("btc_mxn") } returns tickerMock
-
-        val result = getCurrencyDetailUseCase.mapDetail(0, tickerMock,bookMock)
+        val result = Details(0, tickerMock, bookMock)
 
         list.add(result)
 
         advanceUntilIdle()
 
         coEvery {
-            repository.insertDetail(list)
+            if (networkMock.isNetworkConnected()) {
+                repository.insertDetail(list)
+            }
         }
-
-
     }
 }

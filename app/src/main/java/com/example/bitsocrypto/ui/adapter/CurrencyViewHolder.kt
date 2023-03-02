@@ -1,6 +1,5 @@
 package com.example.bitsocrypto.ui.adapter
 
-
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.bitsocrypto.databinding.ItemCurrencyBinding
 import com.example.bitsocrypto.domain.models.Currency
@@ -20,5 +19,4 @@ class CurrencyViewHolder(private val view: ItemCurrencyBinding) :
             root.setOnClickListener { onClickListener.onItemSelected(currencyModel) }
         }
     }
-
 }

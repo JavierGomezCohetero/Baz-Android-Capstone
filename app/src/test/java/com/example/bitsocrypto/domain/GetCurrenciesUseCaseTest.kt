@@ -1,32 +1,26 @@
 package com.example.bitsocrypto.domain
 
-import com.example.bitsocrypto.data.model.CurrencyModel
 import com.example.bitsocrypto.data.model.IconResultModelItem
 import com.example.bitsocrypto.domain.models.Currency
 import com.example.bitsocrypto.domain.repository.CurrencyRepository
-import com.example.bitsocrypto.domain.repository.utils.DataConverter
-import com.example.bitsocrypto.utils.extensions.stringConvert
+import com.google.common.truth.Truth.assertThat
 import io.mockk.MockKAnnotations
 import io.mockk.clearAllMocks
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.impl.annotations.RelaxedMockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.flow.collect
-
 
 internal class GetCurrenciesUseCaseTest {
     @RelaxedMockK
     private lateinit var repository: CurrencyRepository
     lateinit var getCurrenciesUseCase: GetCurrenciesUseCase
-    private var dataConverter: DataConverter = DataConverter
 
     @Before
     fun onBefore() {
@@ -35,7 +29,7 @@ internal class GetCurrenciesUseCaseTest {
     }
 
     @After
-    fun onAfter(){
+    fun onAfter() {
         clearAllMocks()
     }
 
@@ -67,7 +61,6 @@ internal class GetCurrenciesUseCaseTest {
             )
         )
         coEvery { repository.getAllCurrencies() } returns listMock
-        val response = getCurrenciesUseCase.mapCurrencies(listMock, iconMock)
 
         val result = getCurrenciesUseCase()
         advanceUntilIdle()
@@ -79,8 +72,7 @@ internal class GetCurrenciesUseCaseTest {
             repository.clearCurrencies()
         }
         coVerify(exactly = 1) {
-            repository.insertCurrencies(response)
+            repository.insertCurrencies(listMock)
         }
-
     }
 }

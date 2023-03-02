@@ -19,7 +19,6 @@ class TickersAdapter :
         override fun areContentsTheSame(oldItem: AskBid, newItem: AskBid): Boolean {
             return oldItem == newItem
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TickersAdapter {

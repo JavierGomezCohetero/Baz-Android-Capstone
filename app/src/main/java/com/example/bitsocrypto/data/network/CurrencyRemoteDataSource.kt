@@ -1,16 +1,15 @@
 package com.example.bitsocrypto.data.network
 
-import com.example.bitsocrypto.core.RetrofitHelper
-import com.example.bitsocrypto.data.model.CurrencyDetailModel
-import com.example.bitsocrypto.data.model.CurrencyModel
-import com.example.bitsocrypto.data.model.IconResultModelItem
-import com.example.bitsocrypto.data.model.TickerModel
+import com.example.bitsocrypto.data.model.*
+import io.reactivex.rxjava3.core.Single
+import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
-class CurrencyRemoteDataSource @Inject constructor(private val api: CurrencyApiClient) {
-    private val icon = RetrofitHelper.getIcons()
+class CurrencyRemoteDataSource @Inject constructor(
+    private val api: CurrencyApiClient,
+    private val icon_service: IconApiClient
+) {
 
     suspend fun getCurrencies(): List<CurrencyModel> {
         return withContext(Dispatchers.IO) {
@@ -19,23 +18,17 @@ class CurrencyRemoteDataSource @Inject constructor(private val api: CurrencyApiC
         }
     }
 
-    suspend fun getBook(currencyName: String): CurrencyDetailModel {
-        return withContext(Dispatchers.IO) {
-            val response = api.getBook(currencyName)
-            response.body()?.payload!!
-        }
+    fun getBook(currency_name: String): Single<CurrencyDetailResultModel> {
+        return api.getBook(currency_name)
     }
 
-    suspend fun getTicker(currencyName: String): TickerModel {
-        return withContext(Dispatchers.IO) {
-            val response = api.getTickers(currencyName)
-            response.body()?.payload!!
-        }
+    fun getTicker(currencyName: String): Single<TickerResultModel> {
+        return api.getTickers(currencyName)
     }
 
     suspend fun getIcons(): List<IconResultModelItem> {
         return withContext(Dispatchers.IO) {
-            val response = icon.create(IconApiClient::class.java).getIcons()
+            val response = icon_service.getIcons()
             response.body() ?: emptyList()
         }
     }

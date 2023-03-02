@@ -17,7 +17,6 @@ class CurrencyAdapter(private val onClickListener: OnItemClickSelected) :
         override fun areContentsTheSame(oldItem: Currency, newItem: Currency): Boolean {
             return oldItem.book == newItem.book
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyViewHolder {

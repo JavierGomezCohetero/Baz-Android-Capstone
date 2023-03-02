@@ -1,45 +1,28 @@
 package com.example.bitsocrypto.domain.repository
 
-import com.example.bitsocrypto.data.database.dao.CurrencyDao
-import com.example.bitsocrypto.data.database.entities.toDatabase
 import com.example.bitsocrypto.data.model.*
-import com.example.bitsocrypto.data.network.CurrencyRemoteDataSource
 import com.example.bitsocrypto.domain.models.*
-import com.example.bitsocrypto.utils.extensions.stringConvert
-import javax.inject.Inject
+import io.reactivex.rxjava3.core.Single
 
-class CurrencyRepository @Inject constructor(
-    private val api: CurrencyRemoteDataSource, private val currencyDao: CurrencyDao
-) {
+interface CurrencyRepository {
 
+    suspend fun getAllCurrencies(): List<Currency>
 
-    // FROM API
-    suspend fun getAllCurrencies(): List<Currency> = api.getCurrencies().map { it.toDomain() }
+    suspend fun getIcons(): List<IconResultModelItem>
 
-    suspend fun getBook(currencyName: String): Book =
-        api.getBook(currencyName).toDomain()
+    fun getBook(id: String): Single<Book>
 
-    suspend fun getTicker(currencyName: String): Ticker = api.getTicker(currencyName).toDomain()
+    fun getTicker(id: String): Single<Ticker>
 
-    suspend fun getIcons(): List<IconResultModelItem> = api.getIcons()
+    suspend fun getAllCurrencyDatabase(): List<Currency>
 
-    // FROM ROOM
+    suspend fun insertCurrencies(currencies: List<Currency>)
 
-    suspend fun getAllCurrencyDatabase(): List<Currency> =
-        currencyDao.getAllCurrencies().map { it.toDomain() }
+    suspend fun clearCurrencies()
 
-    suspend fun insertCurrencies(currencies: List<Currency>) =
-        currencyDao.insertAll(currencies.map { it.toDatabase() })
+    fun getDetail(): List<Details>
 
-    suspend fun clearCurrencies() = currencyDao.deleteAllCurrencies()
+    fun insertDetail(detail: List<Details>)
 
-
-    suspend fun getDetail(): List<Details> = currencyDao.getAllDetails().map { it.toDatabase() }
-
-    suspend fun insertDetail(detail: List<Details>) =
-        currencyDao.insertDetails(detail.map { it.toDatabase() })
-
-    suspend fun clearDetail() = currencyDao.deleteAllDetails()
-
-
+    fun clearDetail()
 }

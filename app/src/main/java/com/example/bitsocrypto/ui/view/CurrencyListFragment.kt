@@ -1,12 +1,12 @@
 package com.example.bitsocrypto.ui.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,7 +14,7 @@ import com.example.bitsocrypto.databinding.FragmentCurrencyListBinding
 import com.example.bitsocrypto.domain.models.Currency
 import com.example.bitsocrypto.ui.adapter.CurrencyAdapter
 import com.example.bitsocrypto.ui.viewmodel.CurrencyViewModel
-
+import com.example.bitsocrypto.utils.network.NetworkState
 
 class CurrencyListFragment : Fragment(), CurrencyAdapter.OnItemClickSelected {
 
@@ -23,7 +23,8 @@ class CurrencyListFragment : Fragment(), CurrencyAdapter.OnItemClickSelected {
     private lateinit var adapter: CurrencyAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCurrencyListBinding.inflate(inflater, container, false)
@@ -38,7 +39,6 @@ class CurrencyListFragment : Fragment(), CurrencyAdapter.OnItemClickSelected {
             recyclerCurrency.setHasFixedSize(false)
             recyclerCurrency.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-
         }
         currencyViewModel.getCurrencies()
         showData()
@@ -54,12 +54,15 @@ class CurrencyListFragment : Fragment(), CurrencyAdapter.OnItemClickSelected {
 
     private fun showData() {
         currencyViewModel.state.observe(viewLifecycleOwner) {
-            if (it.error.isNotBlank()) {
-                Toast.makeText(context, it.error, Toast.LENGTH_SHORT).show()
-            } else {
-                binding.pbCurrency.isVisible = it.is_loading
-                adapter.submitList(it.availableBooks)
+            if (!NetworkState(requireContext().applicationContext).isNetworkConnected()) {
+                Toast.makeText(
+                    context,
+                    "Couldn't reach server. Check your internet connection.",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
+            binding.pbCurrency.isVisible = it.is_loading
+            adapter.submitList(it.availableBooks)
         }
     }
 }
